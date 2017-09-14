@@ -42,6 +42,12 @@ namespace Kata20170914_ClockInMirror
             WhatIsTheTimeInMirrorShouldBe("06:35", "05:25");
         }
 
+        [TestMethod]
+        public void input_1201_should_return_1159()
+        {
+            WhatIsTheTimeInMirrorShouldBe("11:59", "12:01");
+        }
+
         private static void WhatIsTheTimeInMirrorShouldBe(string expected, string timeInMirror)
         {
             var kata = new Kata();
@@ -58,7 +64,7 @@ namespace Kata20170914_ClockInMirror
             var min = timeInMirror.Split(':')[1];
 
             min = min == "00" ? "00" : (60 - int.Parse(min)).ToString("0#");
-            hour = hour == "12" ? "12": ((min == "00" ? 12 : 11) - int.Parse(hour)).ToString("0#");
+            hour = ((min == "00" ? 12 : 11) - int.Parse(hour == "12" ? "00" : hour)).ToString("0#");
 
             return $"{hour}:{min}";
         }
