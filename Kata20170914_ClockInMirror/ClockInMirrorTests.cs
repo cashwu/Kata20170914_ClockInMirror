@@ -66,14 +66,12 @@ namespace Kata20170914_ClockInMirror
     {
         public string WhatIsTheTime(string timeInMirror)
         {
-            var hour = timeInMirror.Split(':')[0];
-            var min = timeInMirror.Split(':')[1];
+            var minNUm = (60 - int.Parse(timeInMirror.Split(':')[1])) % 60;
 
-            min = min == "00" ? "00" : (60 - int.Parse(min)).ToString("0#");
-            hour = ((min == "00" ? 12 : 11) - int.Parse(hour == "12" ? "00" : hour)).ToString("0#");
-            hour = hour == "00" ? "12" : hour;
+            var hourNum = (minNUm == 00 ? 12 : 11) - int.Parse(timeInMirror.Split(':')[0]);
+            hourNum = hourNum <= 0 ? hourNum += 12 : hourNum;
 
-            return $"{hour}:{min}";
+            return $"{hourNum:00}:{minNUm:00}";
         }
     }
 }
